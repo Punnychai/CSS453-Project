@@ -23,56 +23,84 @@
         }
 
         form {
-            width: 300px;
+            width: 320px;
             background-color: #fff;
-            margin: 60px;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: box-shadow 0.3s ease;
         }
 
-        input[type="text"], input[type="file"] {
-            width: calc(100% - 40px);
-            padding: 10px;
-            margin: 10px 20px;
-            border: none;
-            border-bottom: 3px solid #777;
-            border-radius: 0;
+        form:hover {
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin: 12px 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
             box-sizing: border-box;
+            font-size: 1em;
+            color: #333;
         }
 
-        input:focus {
+        input[type="text"]:focus {
+            border-color: #4CA82C;
             outline: none;
+            box-shadow: 0 0 5px rgba(76, 168, 44, 0.2);
+        }
+
+        /* custom file input */
+        .custom-file-upload {
+            display: inline-block;
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin: 12px 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            box-sizing: border-box;
+            font-size: 1em;
+            color: #777;
+        }
+
+        .custom-file-upload:hover {
+            border-color: #4CA82C;
+            outline: none;
+            box-shadow: 0 0 5px rgba(76, 168, 44, 0.2);
+        }
+
+        input[type="file"] {
+            display: none; /* Hide the default file input */
         }
 
         input[type="submit"] {
             width: 100%;
             background-color: #4CA82C;
             color: white;
-            padding: 15px 0;
-            margin: 10px 0;
+            padding: 14px;
+            margin: 12px 0;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 1.1em;
             font-weight: 600;
+            transition: background-color 0.3s ease;
             box-sizing: border-box;
         }
 
-        img {
-            width: 20px;
-            height: 20px;
-            margin-right: 10px;
+        input[type="submit"]:hover {
+            background-color: #3c8833;
         }
 
         .formInput h1 {
             text-align: center;
-        }
-
-        .formInput div {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
+            font-size: 1.5em;
+            color: #333;
         }
     </style>
 </head>
@@ -89,6 +117,8 @@
         <!-- Form for checking local file upload -->
         <form action="" method="post" enctype="multipart/form-data" class="formInput" id="Local">
             <h1>Check Local File</h1>
+            
+            <label for="input_local" class="custom-file-upload">Choose a File</label>
             <input type="file" name="input_local" id="input_local" required>
             <input type="submit" name="submit_local" value="SUBMIT">
         </form>
