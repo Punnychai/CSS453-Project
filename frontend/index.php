@@ -36,24 +36,6 @@
             box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
         }
 
-        input[type="text"] {
-            width: calc(100% - 20px);
-            padding: 12px;
-            margin: 12px 10px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-            box-sizing: border-box;
-            font-size: 1em;
-            color: #333;
-        }
-
-        input[type="text"]:focus {
-            border-color: #4CA82C;
-            outline: none;
-            box-shadow: 0 0 5px rgba(76, 168, 44, 0.2);
-        }
-
         /* custom file input */
         .custom-file-upload {
             display: inline-block;
@@ -107,13 +89,6 @@
 
 <body>
     <div class="center">
-        <!-- Form for checking from a link -->
-        <form action="" method="post" class="formInput" id="Link">
-            <h1>Check from Link</h1>
-            <input type="text" name="input_link" id="input_link" placeholder="Put link to file here" required>
-            <input type="submit" name="submit_link" value="SUBMIT">
-        </form>
-
         <!-- Form for checking local file upload -->
         <form action="" method="post" enctype="multipart/form-data" class="formInput" id="Local">
             <h1>Check Local File</h1>
@@ -127,13 +102,7 @@
     <?php
         // Handle form submissions
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // Check if 'Check from Link' form was submitted
-            if (isset($_POST['submit_link'])) {
-                $link_file = htmlspecialchars($_POST['input_link']);
-                echo "<script>alert('Checking from link for file: $link_file');</script>";
-            }
 
-            // Check if 'Check Local File' form was submitted
             if (isset($_POST['submit_local'])) {
                 // Check if a file was uploaded without errors
                 if (isset($_FILES['input_local']) && $_FILES['input_local']['error'] === UPLOAD_ERR_OK) {
