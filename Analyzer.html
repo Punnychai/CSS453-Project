@@ -7,41 +7,33 @@
     <title>APK Analyzer</title>
     <style>
         html {
-            overflow: hidden;
+            scrollbar-width: none;
         }
         body {
             font-family: "Inter", sans-serif;
-            background-color: #f7f7f7;
-            color: #333;
             text-align: center;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .container {
-            background-color: #ffffff;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding-top: 10vh;
         }
         input[type="file"] {
-            padding: 12px;
-            width: 576px;
+            padding: 1%;
+            width: 38vw;
             border: 2px solid #e1e1e1;
-            border-radius: 8px;
+            border-radius: 0.5vw;
             font-size: 16px;
-            margin: 30px 0;
+            margin-top: 3vh;
         }
 
         button {
-            padding: 12px;
-            width: 600px;
+            padding: 1%;
+            width: 40vw;
             border: none;
-            border-radius: 8px;
+            border-radius: 0.5vw;
             background-color: green;
             color: white;
             font-size: 16px;
+            margin-top: 3vh;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
@@ -55,11 +47,20 @@
             margin-top: 20px;
             color: #555;
         }
+
+        @media (max-width: 1300px) {
+            input[type="file"] {
+                width: 74vw;
+            }
+            button {
+                width: 76vw;
+            }
+        }
     </style>
 </head>
 <body>
     <img src="logo.png" alt="" style="width: 300px;">
-    <h1 style="text-align: center;">ElGato APK Analyzer</h1>
+    <h1>ElGato APK Analyzer</h1>
     <h3>Please Upload APK For Analysis</h3>
     <form id="uploadForm">
         <input type="file" id="apkFile" name="file" required>
@@ -67,7 +68,7 @@
         <button id="submit" type="submit">Analyze</button>
         
     </form>
-    <p id="result" style="text-align: center;"></p>
+    <p id="result"></p>
 
     <script>
         document.getElementById('uploadForm').addEventListener('submit', async (event) => {
