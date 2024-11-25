@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <link rel="shortcut icon" type="image/x-icon" href="/logo.png">
+    <title>APK Analyzer</title>
+    <style>
+        html {
+            overflow: hidden;
+        }
+        body {
+            font-family: "Inter", sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        input[type="file"] {
+            padding: 12px;
+            width: 576px;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            font-size: 16px;
+            margin: 30px 0;
+        }
+
+        button {
+            padding: 12px;
+            width: 600px;
+            border: none;
+            border-radius: 8px;
+            background-color: green;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2d9c2d;
+        }
+
+        #result {
+            font-size: 24px;
+            margin-top: 20px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <img src="logo.png" alt="" style="width: 300px;">
+    <h1 style="text-align: center;">ElGato APK Analyzer</h1>
+    <h3>Please Upload APK For Analysis</h3>
+    <form id="uploadForm">
+        <input type="file" id="apkFile" name="file" required>
+        <br />
+        <button id="submit" type="submit">Analyze</button>
+        
+    </form>
+    <p id="result" style="text-align: center;"></p>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const fileInput = document.getElementById('apkFile');
+            const file = fileInput.files[0];
+
+            if (file) {
+                const formData = new FormData();
+                formData.append('file', file);
+
+                const bucketUrl = 'https://apk-analyzer-storage.s3.amazonaws.com/file-storage/';
+
+                // construct the full url with file name
+                const fileUrl = bucketUrl + file.name;
+
+                try {
+                    // Upload the file to S3
+                    const response = await fetch(fileUrl, {
+                        method: 'PUT',
+                        body: file,
+                        headers: {
+                            'Content-Type': file.type,
+                        },
+                    });
+
+                    if (response.ok) {
+                        document.getElementById('result').innerText = 'File uploaded. Analyzing...';
+                    } else {
+                        throw new Error('Failed to upload file');
+                    }
+                } catch (error) {
+                    document.getElementById('result').innerText = `Error: ${error.message}`;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
